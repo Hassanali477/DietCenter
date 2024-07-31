@@ -12,12 +12,47 @@ import {useNavigation} from '@react-navigation/native';
 
 const {width, height} = Dimensions.get('screen');
 
+const translations = {
+  en: {
+    itemTotal: 'Item Total',
+    dayType: 'Day Type',
+    numOfDays: 'No. of Days',
+    deliveryFees: 'Delivery Fees',
+    subTotal: 'Sub Total',
+    tax: 'Tax (15%)',
+    total: 'Total',
+    itemTotalValue: 'SR 1330.50',
+    dayTypeValue: 'Full Days',
+    numOfDaysValue: '20 Days',
+    deliveryFeesValue: 'SR 00.00',
+    subTotalValue: 'SR 1330.50',
+    taxValue: 'SR 199.58',
+    totalValue: 'SR 1530.08',
+  },
+  ar: {
+    itemTotal: 'إجمالي العناصر',
+    dayType: 'نوع اليوم',
+    numOfDays: 'عدد الأيام',
+    deliveryFees: 'رسوم التوصيل',
+    subTotal: 'الإجمالي الفرعي',
+    tax: 'الضريبة (15%)',
+    total: 'المجموع',
+    itemTotalValue: '1330.50 ريال',
+    dayTypeValue: 'أيام كاملة',
+    numOfDaysValue: '20 يوما',
+    deliveryFeesValue: '00.00 ريال',
+    subTotalValue: '1330.50 ريال',
+    taxValue: '199.58 ريال',
+    totalValue: '1530.08 ريال',
+  },
+};
+
 const OrderDetails = () => {
   const route = useRoute();
-  const {order} = route.params; // Get the order data from navigation params
+  const {order, language} = route.params;
   const navigation = useNavigation();
+  const trans = translations[language === 'arabic' ? 'ar' : 'en'];
 
-  // Function to get status icon based on order status
   const getStatusIcon = status => {
     switch (status) {
       case 'ongoing':
@@ -69,38 +104,52 @@ const OrderDetails = () => {
           </View>
           <View style={styles.detailsContainer}>
             <View style={styles.bottomLine} />
-            <View style={styles.detailsRow}>
+            <View
+              style={[
+                styles.detailsRow,
+                {flexDirection: language === 'arabic' ? 'row-reverse' : 'row'},
+              ]}>
               <View style={styles.detailsLabels}>
-                <Text style={styles.summaryHeading}>Item Total</Text>
-                <Text style={styles.summaryHeading}>Day Type</Text>
-                <Text style={styles.summaryHeading}>No. of Days</Text>
-                <Text style={styles.summaryHeading}>Delivery Fees</Text>
+                <Text style={styles.summaryHeading}>{trans.itemTotal}</Text>
+                <Text style={styles.summaryHeading}>{trans.dayType}</Text>
+                <Text style={styles.summaryHeading}>{trans.numOfDays}</Text>
+                <Text style={styles.summaryHeading}>{trans.deliveryFees}</Text>
               </View>
               <View style={styles.detailsValues}>
-                <Text style={styles.summaryValue}>SR 1330.50</Text>
-                <Text style={styles.summaryValue}>Full Days</Text>
-                <Text style={styles.summaryValue}>20 Days</Text>
-                <Text style={styles.summaryValue}>SR 00.00</Text>
+                <Text style={styles.summaryValue}>{trans.itemTotalValue}</Text>
+                <Text style={styles.summaryValue}>{trans.dayTypeValue}</Text>
+                <Text style={styles.summaryValue}>{trans.numOfDaysValue}</Text>
+                <Text style={styles.summaryValue}>
+                  {trans.deliveryFeesValue}
+                </Text>
               </View>
             </View>
             <View style={styles.bottomLine} />
-            <View style={styles.summaryRow}>
+            <View
+              style={[
+                styles.summaryRow,
+                {flexDirection: language === 'arabic' ? 'row-reverse' : 'row'},
+              ]}>
               <View style={styles.summaryContainer}>
-                <Text style={styles.summaryHeading}>Sub Total</Text>
-                <Text style={styles.summaryHeading}>Tax (15%)</Text>
+                <Text style={styles.summaryHeading}>{trans.subTotal}</Text>
+                <Text style={styles.summaryHeading}>{trans.tax}</Text>
               </View>
               <View style={styles.summaryValues}>
-                <Text style={styles.summaryValue}>SR 1330.50</Text>
-                <Text style={styles.summaryValue}>SR 199.58</Text>
+                <Text style={styles.summaryValue}>{trans.subTotalValue}</Text>
+                <Text style={styles.summaryValue}>{trans.taxValue}</Text>
               </View>
             </View>
             <View style={[styles.bottomLine, styles.totalRowLine]} />
-            <View style={styles.totalRow}>
+            <View
+              style={[
+                styles.totalRow,
+                {flexDirection: language === 'arabic' ? 'row-reverse' : 'row'},
+              ]}>
               <Text style={[styles.summaryHeading, styles.totalHeading]}>
-                Total
+                {trans.total}
               </Text>
               <Text style={[styles.summaryValue, styles.totalValue]}>
-                SR 1530.08
+                {trans.totalValue}
               </Text>
             </View>
           </View>
@@ -222,69 +271,65 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
   },
   detailsRow: {
+    width: '100%',
     flexDirection: 'row',
     justifyContent: 'space-between',
+    alignItems: 'center',
   },
   detailsLabels: {
     flexDirection: 'column',
-    width: '50%',
+    alignItems: 'flex-start',
   },
   detailsValues: {
     flexDirection: 'column',
-    width: '50%',
     alignItems: 'flex-end',
-  },
-  bottomLine: {
-    borderWidth: 0.2,
-    borderColor: 'rgba(21, 75, 38, 0.3)',
-    marginTop: 10,
-    borderStyle: 'solid',
-    marginBottom: 10,
   },
   summaryRow: {
     flexDirection: 'row',
     width: '100%',
     justifyContent: 'space-between',
   },
-  summaryContainer: {
-    flexDirection: 'column',
-    width: '50%',
+  bottomLine: {
+    width: '100%',
+    height: 1,
+    backgroundColor: '#E2E8F3',
+    marginTop: 15,
   },
   summaryHeading: {
-    fontSize: 16,
-    color: 'rgba(56, 56, 56, 0.8)',
+    fontSize: 14,
+    color: '#828E9D',
     fontWeight: '400',
     marginBottom: 10,
   },
-  totalHeading: {
-    color: 'rgba(21, 75, 38, 1)',
-    fontWeight: '700',
+  summaryValue: {
+    fontSize: 14,
+    color: '#030B06',
+    fontWeight: '400',
+    marginBottom: 10,
+  },
+  summaryContainer: {
+    flexDirection: 'column',
   },
   summaryValues: {
     flexDirection: 'column',
-    width: '50%',
     alignItems: 'flex-end',
-  },
-  summaryValue: {
-    fontSize: 16,
-    color: 'rgba(0, 0, 0, 1)',
-    fontWeight: '500',
-    marginBottom: 10,
   },
   totalRow: {
     flexDirection: 'row',
-    justifyContent: 'space-between',
     width: '100%',
+    justifyContent: 'space-between',
   },
   totalRowLine: {
-    borderWidth: 0.3,
-    borderColor: 'rgba(21, 75, 38, 0.3)',
-    marginVertical: 10,
-    borderStyle: 'dashed',
+    marginTop: 20,
+    marginBottom: 15,
+  },
+  totalHeading: {
+    fontWeight: '700',
+    fontSize: 16,
   },
   totalValue: {
-    color: 'rgba(21, 75, 38, 1)',
     fontWeight: '700',
+    fontSize: 16,
   },
 });
 

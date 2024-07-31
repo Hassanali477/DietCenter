@@ -8,33 +8,56 @@ import {
   FlatList,
 } from 'react-native';
 
+// Example image
 const maleImage = require('../Assets/Images/Male-Image.png');
 
 const {width, height} = Dimensions.get('screen');
 
-class HeightSelectionScreen extends Component {
-  state = {
-    selectedHeight: 120, // Default height in cm
-    scrollOffsetY: 0, // Store the current scroll position
-    highlightedIndex: 66,
-    highlightedValue: 167,
-  };
+export default class HeightSelectionScreen extends Component {
+  constructor(props) {
+    super(props);
+    const language = this.props.userData?.language || 'english';
+    this.state = {
+      selectedHeight: 120, // Default height in cm
+      scrollOffsetY: 0, // Store the current scroll position
+      highlightedIndex: 66,
+      highlightedValue: 167,
+      language,
+    };
+  }
 
   render() {
-    const {highlightedIndex} = this.state;
+    const {highlightedIndex, language} = this.state;
     const numbers = Array.from({length: 300}, (_, index) => index + 100);
+
+    // Translation for the heading based on the language
+    const headingText =
+      language === 'english' ? 'Select Your Height?' : 'اختر طولك؟';
 
     return (
       <View style={styles.container}>
-        <Text style={styles.heading}>Select Your Height?</Text>
-        <View style={styles.content}>
+        <Text
+          style={[
+            styles.heading,
+            language === 'arabic'
+              ? styles.headingArabic
+              : styles.headingEnglish,
+          ]}>
+          {headingText}
+        </Text>
+        <View
+          style={[
+            styles.content,
+            language === 'arabic' && styles.contentArabic,
+          ]}>
           <Image source={maleImage} style={styles.image} resizeMode="contain" />
 
-          <View style={[styles.scrollCont]}>
+          <View style={styles.scrollCont}>
             <View style={styles.lines1} />
             <View style={styles.lines2} />
             <FlatList
               style={{width: '100%'}}
+              s
               data={numbers}
               renderItem={({item, index}) => {
                 const isSelected = highlightedIndex === index;
@@ -81,8 +104,6 @@ class HeightSelectionScreen extends Component {
   }
 }
 
-export default HeightSelectionScreen;
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -95,8 +116,16 @@ const styles = StyleSheet.create({
     fontSize: 24,
     marginBottom: 20,
     color: 'black',
-    alignSelf: 'flex-start',
     fontFamily: 'Careem Bold',
+    textAlign: 'left', // Default to left alignment
+  },
+  headingArabic: {
+    textAlign: 'right', // Align text to the right for Arabic
+    alignSelf: 'flex-end',
+  },
+  headingEnglish: {
+    textAlign: 'left', // Align text to the left for English
+    alignSelf: 'flex-start',
   },
   content: {
     flexDirection: 'row',
@@ -104,6 +133,9 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'space-between',
     marginTop: 20,
+  },
+  contentArabic: {
+    flexDirection: 'row-reverse', // Reverse the row direction for Arabic
   },
   image: {
     height: 500,
@@ -115,7 +147,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     marginRight: 30,
-    // paddingTop: height / 1.6 / 2 - 25,
   },
   numberContainer: {
     height: 45,

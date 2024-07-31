@@ -7,6 +7,10 @@ import OrderDetails from '../Components/OrderDetails';
 import FlatlistProfile from '../Components/FlatlistProfile';
 import HeaderPolicy from '../Components/HeaderPolicy';
 import HeightSelectionScreen from '../Components/HeightCheckScreen';
+import VoucherFlatlist from '../Components/VoucherFlatlist';
+import ClinicFlatlist from '../Components/ClinicFlatlist';
+import ClinicDetails from '../Components/ClinicDetails';
+import CustomTextInput from '../Components/CustomTextInput';
 
 const Stack = createStackNavigator();
 
@@ -21,20 +25,20 @@ const Navigation = () => {
             headerShown: false,
           }}
         /> */}
-        <Stack.Screen
+        {/* <Stack.Screen
           name="FlatlistProfile"
           component={FlatlistProfile}
           options={{
             headerShown: false,
           }}
-        />
-        <Stack.Screen
+        /> */}
+        {/* <Stack.Screen
           name="HeightChecking"
           component={HeightSelectionScreen}
           options={{
             headerShown: false,
           }}
-        />
+        /> */}
         <Stack.Screen
           name="OrdersFlatlist"
           component={OrdersFlatlist}
@@ -45,6 +49,30 @@ const Navigation = () => {
           component={OrderDetails}
           options={{headerShown: false}}
         />
+        {/* <Stack.Screen name='Voucher' component={VoucherFlatlist} options={{
+          headerShown:false
+        }} /> */}
+        {/* <Stack.Screen
+          name="ClinicFlatlist"
+          component={ClinicFlatlist}
+          options={{
+            headerShown: false,
+          }}
+        />
+        <Stack.Screen
+          name="ClinicDetails"
+          component={ClinicDetails}
+          options={{
+            headerShown: false,
+          }}
+        /> */}
+        {/* <Stack.Screen
+          name="CustomTextInput"
+          component={CustomTextInput}
+          options={{
+            headerShown: false,
+          }}
+        /> */}
       </Stack.Navigator>
     </NavigationContainer>
   );
