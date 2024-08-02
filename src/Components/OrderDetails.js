@@ -155,6 +155,11 @@ const OrderDetails = () => {
           </View>
         </View>
       </View>
+      <TouchableOpacity
+        style={styles.nextButton}
+        onPress={() => navigation.navigate('Voucher')}>
+        <Text style={styles.buttonText}>Next</Text>
+      </TouchableOpacity>
     </View>
   );
 };
@@ -329,6 +334,18 @@ const styles = StyleSheet.create({
   },
   totalValue: {
     fontWeight: '700',
+    fontSize: 16,
+  },
+  nextButton: {
+    position: 'absolute',
+    bottom: 20,
+    right: 20,
+    padding: 10,
+    backgroundColor: '#007BFF',
+    borderRadius: 5,
+  },
+  buttonText: {
+    color: '#FFF',
     fontSize: 16,
   },
 });

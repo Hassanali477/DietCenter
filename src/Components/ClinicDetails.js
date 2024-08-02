@@ -10,10 +10,13 @@ import {
   FlatList,
 } from 'react-native';
 import Svg, {G, Path} from 'react-native-svg';
+import {useNavigation} from '@react-navigation/native';
+
 
 const {width} = Dimensions.get('screen');
 
 const ClinicDetailsScreen = ({route}) => {
+  const navigation = useNavigation();
   const {item, language} = route.params;
   const isArabic = language === 'arabic';
 
@@ -141,6 +144,11 @@ const ClinicDetailsScreen = ({route}) => {
           />
         </View>
       </View>
+      <TouchableOpacity
+        style={styles.nextButton}
+        onPress={() => navigation.navigate('CustomTextInput')}>
+        <Text style={styles.buttonText}>Next</Text>
+      </TouchableOpacity>
     </ScrollView>
   );
 };
@@ -280,6 +288,20 @@ const styles = StyleSheet.create({
   englishStyle: {
     textAlign: 'left', // Align text to the left for English
     alignSelf: 'flex-start',
+  },
+  nextButton: {
+    // position: 'absolute',
+    // bottom: 20,
+    // right: 20,
+    padding: 10,
+    backgroundColor: '#007BFF',
+    borderRadius: 5,
+    alignSelf: 'flex-end',
+    marginRight: 20,
+  },
+  buttonText: {
+    color: '#FFF',
+    fontSize: 16,
   },
 });
 

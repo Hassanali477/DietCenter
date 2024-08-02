@@ -80,7 +80,10 @@ class FlatlistProfile extends Component {
       language: 'english', // Default language
     };
   }
-
+  handleNext = () => {
+    const {navigation} = this.props;
+    navigation.navigate('HeightChecking'); // Replace 'NextScreen' with the actual name of the screen
+  };
   toggleLanguage = () => {
     this.setState(prevState => ({
       language: prevState.language === 'english' ? 'arabic' : 'english',
@@ -174,6 +177,9 @@ class FlatlistProfile extends Component {
           keyExtractor={item => item.name} // Using name as key
           contentContainerStyle={styles.listContentContainer}
         />
+         <TouchableOpacity style={styles.nextButton} onPress={this.handleNext}>
+          <Text style={styles.buttonText}>Next</Text>
+        </TouchableOpacity>
       </View>
     );
   }
@@ -301,5 +307,17 @@ const styles = StyleSheet.create({
     fontSize: 16,
     color: '#fff',
     fontWeight: 'bold',
+  },
+  nextButton: {
+    position: 'absolute',
+    bottom: 20,
+    right: 20,
+    padding: 10,
+    backgroundColor: '#007BFF',
+    borderRadius: 5,
+  },
+  buttonText: {
+    color: '#FFF',
+    fontSize: 16,
   },
 });

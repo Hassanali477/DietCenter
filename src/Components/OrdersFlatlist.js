@@ -95,7 +95,9 @@ const OrdersFlatlist = () => {
 
   const renderCard = ({item}) => (
     <TouchableOpacity
-      onPress={() => navigation.navigate('OrderDetails', {order: item, language})}>
+      onPress={() =>
+        navigation.navigate('OrderDetails', {order: item, language})
+      }>
       <View style={styles.cardContainer}>
         <View
           style={[
@@ -160,6 +162,7 @@ const OrdersFlatlist = () => {
         renderItem={renderCard}
         keyExtractor={item => item.id.toString()}
       />
+    
     </View>
   );
 };
@@ -283,6 +286,7 @@ const styles = StyleSheet.create({
     color: 'rgba(147, 193, 69, 1)',
     borderRadius: 5,
   },
+
 });
 
 export default OrdersFlatlist;

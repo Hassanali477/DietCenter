@@ -6,6 +6,7 @@ import {
   Image,
   Dimensions,
   FlatList,
+  TouchableOpacity,
 } from 'react-native';
 
 // Example image
@@ -25,7 +26,15 @@ export default class HeightSelectionScreen extends Component {
       language,
     };
   }
-
+  handleNext = () => {
+    const {navigation} = this.props;
+    navigation.navigate('OrdersFlatlist'); // Replace 'NextScreen' with the actual name of the screen
+  };
+  toggleLanguage = () => {
+    this.setState(prevState => ({
+      language: prevState.language === 'english' ? 'arabic' : 'english',
+    }));
+  };
   render() {
     const {highlightedIndex, language} = this.state;
     const numbers = Array.from({length: 300}, (_, index) => index + 100);
@@ -36,6 +45,13 @@ export default class HeightSelectionScreen extends Component {
 
     return (
       <View style={styles.container}>
+        <TouchableOpacity
+          style={styles.toggleButton}
+          onPress={this.toggleLanguage}>
+          <Text style={styles.toggleButtonText}>
+            {language === 'english' ? 'Switch to Arabic' : 'Switch to English'}
+          </Text>
+        </TouchableOpacity>
         <Text
           style={[
             styles.heading,
@@ -57,7 +73,6 @@ export default class HeightSelectionScreen extends Component {
             <View style={styles.lines2} />
             <FlatList
               style={{width: '100%'}}
-              s
               data={numbers}
               renderItem={({item, index}) => {
                 const isSelected = highlightedIndex === index;
@@ -99,6 +114,10 @@ export default class HeightSelectionScreen extends Component {
             />
           </View>
         </View>
+
+        <TouchableOpacity style={styles.nextButton} onPress={this.handleNext}>
+          <Text style={styles.buttonText}>Next</Text>
+        </TouchableOpacity>
       </View>
     );
   }
@@ -191,5 +210,30 @@ const styles = StyleSheet.create({
     position: 'absolute',
     top: height / 1.5 / 2 + 23, // Adjust for proper centering
     zIndex: 200,
+  },
+  toggleButton: {
+    alignSelf: 'center',
+    backgroundColor: '#93C145',
+    borderRadius: 20,
+    paddingVertical: 10,
+    paddingHorizontal: 20,
+    marginBottom: 16,
+  },
+  toggleButtonText: {
+    fontSize: 16,
+    color: '#fff',
+    fontWeight: 'bold',
+  },
+  nextButton: {
+    position: 'absolute',
+    bottom: 20,
+    right: 20,
+    padding: 10,
+    backgroundColor: '#007BFF',
+    borderRadius: 5,
+  },
+  buttonText: {
+    color: '#FFF',
+    fontSize: 16,
   },
 });

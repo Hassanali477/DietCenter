@@ -18,6 +18,11 @@ export default class PrivacyPolicy extends Component {
     const language = this.props.userData?.language || 'english';
     this.state = {language};
   }
+  toggleLanguage = () => {
+    this.setState(prevState => ({
+      language: prevState.language === 'english' ? 'arabic' : 'english',
+    }));
+  };
 
   renderBackArrow() {
     const {language} = this.state;
@@ -123,6 +128,18 @@ export default class PrivacyPolicy extends Component {
         {this.renderBackArrow()}
         {this.renderHeader()}
         {this.renderContent()}
+        <TouchableOpacity
+          style={styles.switchButton}
+          onPress={this.toggleLanguage}>
+          <Text style={styles.buttonText}>
+            {this.state.language === 'english'
+              ? 'Switch to Arabic'
+              : 'Switch to English'}
+          </Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.nextButton}>
+          <Text style={styles.buttonText}>Next</Text>
+        </TouchableOpacity>
       </View>
     );
   }
@@ -207,5 +224,25 @@ const styles = StyleSheet.create({
     marginBottom: 10,
     width: '100%',
     lineHeight: 24,
+  },
+  switchButton: {
+    position: 'absolute',
+    bottom: 80,
+    right: 20,
+    padding: 10,
+    backgroundColor: '#007BFF',
+    borderRadius: 5,
+  },
+  nextButton: {
+    position: 'absolute',
+    bottom: 20,
+    right: 20,
+    padding: 10,
+    backgroundColor: '#007BFF',
+    borderRadius: 5,
+  },
+  buttonText: {
+    color: '#FFF',
+    fontSize: 16,
   },
 });

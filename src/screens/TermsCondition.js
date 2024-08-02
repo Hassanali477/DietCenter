@@ -19,6 +19,16 @@ export default class PrivacyPolicy extends Component {
     this.state = {language};
   }
 
+  handleNext = () => {
+    const {navigation} = this.props;
+    navigation.navigate('FlatlistProfile'); // Replace 'NextScreen' with the actual name of the screen
+  };
+  toggleLanguage = () => {
+    this.setState(prevState => ({
+      language: prevState.language === 'english' ? 'arabic' : 'english',
+    }));
+  };
+
   renderBackArrow() {
     const {language} = this.state;
     return (
@@ -121,6 +131,18 @@ export default class PrivacyPolicy extends Component {
         {this.renderBackArrow()}
         {this.renderHeader()}
         {this.renderContent()}
+        <TouchableOpacity
+          style={styles.switchButton}
+          onPress={this.toggleLanguage}>
+          <Text style={styles.buttonText}>
+            {this.state.language === 'english'
+              ? 'Switch to Arabic'
+              : 'Switch to English'}
+          </Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.nextButton} onPress={this.handleNext}>
+          <Text style={styles.buttonText}>Next</Text>
+        </TouchableOpacity>
       </View>
     );
   }
@@ -130,80 +152,85 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     width: '100%',
-    height: '100%',
-    padding: 20,
-    justifyContent: 'flex-start',
-    alignItems: 'center',
+    backgroundColor: '#F5F5F5',
   },
   backArrowContainer: {
     width: '100%',
-    marginBottom: 30,
-    marginTop: 20,
+    padding: 10,
   },
   backArrow: {
-    width: 40,
-    height: 40,
-  },
-  content: {
-    flex: 1,
-    width: '100%',
+    width: 45,
+    height: 45,
+    marginHorizontal: 10,
+    marginVertical: 10,
   },
   headerContainer: {
     width: '100%',
-    borderWidth: 1,
-    borderColor: '#ddd',
-    borderRadius: 10,
-    padding: 10,
-    marginBottom: 20,
+    paddingVertical: 10,
     alignItems: 'center',
   },
   logoAndHeadingContainer: {
+    width: '90%',
     alignItems: 'center',
+    justifyContent: 'center',
   },
   logo: {
-    width: 60,
-    height: 60,
-    marginHorizontal: 10,
+    width: 100,
+    height: 100,
+    resizeMode: 'contain',
   },
   headingContainer: {
-    padding: 10,
+    marginLeft: 20,
   },
   heading: {
-    fontSize: 26,
+    fontSize: 22,
     fontWeight: 'bold',
     color: '#333',
-    marginBottom: 10,
   },
   headingParagraph: {
-    color: '#828E9D',
-    fontSize: 18,
+    fontSize: 14,
+    color: '#666',
+    marginTop: 5,
   },
-
   paragraphContainer: {
-    height: height,
-    width: '100%',
-    // alignItems: 'center',
+    flex: 1,
+    paddingHorizontal: 20,
   },
   textHeading: {
-    fontSize: 25,
-    width: '100%',
+    fontSize: 20,
+    fontWeight: 'bold',
+    marginTop: 20,
     marginBottom: 10,
-    color: '#030B06',
   },
   text: {
-    fontSize: 18,
-    color: '#828E9D',
-    marginHorizontal: 20,
-    marginBottom: 10,
-    width: '100%',
+    fontSize: 16,
     lineHeight: 24,
+    color: '#444',
   },
   text1: {
-    fontSize: 18,
-    color: '#154B26',
-    marginHorizontal: 20,
-    marginBottom: 10,
-    width: '100%',
+    fontSize: 16,
     lineHeight: 24,
+    color: '#444',
+    marginTop: 20,
+  },
+  switchButton: {
+    position: 'absolute',
+    bottom: 80,
+    right: 20,
+    padding: 10,
+    backgroundColor: '#007BFF',
+    borderRadius: 5,
+  },
+  nextButton: {
+    position: 'absolute',
+    bottom: 20,
+    right: 20,
+    padding: 10,
+    backgroundColor: '#007BFF',
+    borderRadius: 5,
+  },
+  buttonText: {
+    color: '#FFF',
+    fontSize: 16,
   },
 });

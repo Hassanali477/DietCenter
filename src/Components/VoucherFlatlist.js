@@ -8,10 +8,12 @@ import {
   Dimensions,
   TouchableOpacity,
 } from 'react-native';
+import {useNavigation} from '@react-navigation/native';
 
 const {width} = Dimensions.get('screen');
 
 const VoucherFlatlist = () => {
+  const navigation = useNavigation();
   const [language, setLanguage] = useState('english');
 
   const toggleLanguage = () => {
@@ -25,33 +27,37 @@ const VoucherFlatlist = () => {
       id: 1,
       title: language === 'english' ? 'Offers' : 'عروض',
       discount: '20%',
-      content: language === 'english'
-        ? `Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text`
-        : `لوريم إيبسوم ببساطة نص شكلي يستخدم في طباعة النصوص وتركيبها. لوريم إيبسوم كان النص القياسي للطباعة`,
+      content:
+        language === 'english'
+          ? `Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text`
+          : `لوريم إيبسوم ببساطة نص شكلي يستخدم في طباعة النصوص وتركيبها. لوريم إيبسوم كان النص القياسي للطباعة`,
     },
     {
       id: 2,
       title: language === 'english' ? 'Offers' : 'عروض',
       discount: '20%',
-      content: language === 'english'
-        ? `Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text`
-        : `لوريم إيبسوم ببساطة نص شكلي يستخدم في طباعة النصوص وتركيبها. لوريم إيبسوم كان النص القياسي للطباعة`,
+      content:
+        language === 'english'
+          ? `Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text`
+          : `لوريم إيبسوم ببساطة نص شكلي يستخدم في طباعة النصوص وتركيبها. لوريم إيبسوم كان النص القياسي للطباعة`,
     },
     {
       id: 3,
       title: language === 'english' ? 'Offers' : 'عروض',
       discount: '20%',
-      content: language === 'english'
-        ? `Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text`
-        : `لوريم إيبسوم ببساطة نص شكلي يستخدم في طباعة النصوص وتركيبها. لوريم إيبسوم كان النص القياسي للطباعة`,
+      content:
+        language === 'english'
+          ? `Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text`
+          : `لوريم إيبسوم ببساطة نص شكلي يستخدم في طباعة النصوص وتركيبها. لوريم إيبسوم كان النص القياسي للطباعة`,
     },
     {
       id: 4,
       title: language === 'english' ? 'Offers' : 'عروض',
       discount: '20%',
-      content: language === 'english'
-        ? `Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text`
-        : `لوريم إيبسوم ببساطة نص شكلي يستخدم في طباعة النصوص وتركيبها. لوريم إيبسوم كان النص القياسي للطباعة`,
+      content:
+        language === 'english'
+          ? `Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text`
+          : `لوريم إيبسوم ببساطة نص شكلي يستخدم في طباعة النصوص وتركيبها. لوريم إيبسوم كان النص القياسي للطباعة`,
     },
   ];
 
@@ -99,15 +105,18 @@ const VoucherFlatlist = () => {
               styles.titleContainer,
               {flexDirection: language === 'english' ? 'row' : 'row-reverse'},
             ]}>
-            <Text style={[styles.title, language === 'arabic' && {marginLeft: 5}]}>
+            <Text
+              style={[styles.title, language === 'arabic' && {marginLeft: 5}]}>
               {item.title}
             </Text>
           </View>
-          <View style={styles.iconContainer}>
-            {renderArrowIcon()}
-          </View>
+          <View style={styles.iconContainer}>{renderArrowIcon()}</View>
         </View>
-        <View style={[styles.bottomContent, {alignItems: language === 'english' ? 'flex-start' : 'flex-end'}]}>
+        <View
+          style={[
+            styles.bottomContent,
+            {alignItems: language === 'english' ? 'flex-start' : 'flex-end'},
+          ]}>
           <Text
             style={[
               styles.content,
@@ -135,6 +144,11 @@ const VoucherFlatlist = () => {
         keyExtractor={item => item.id.toString()}
         showsVerticalScrollIndicator={false}
       />
+      <TouchableOpacity
+        style={styles.nextButton}
+        onPress={() => navigation.navigate('ClinicFlatlist')}>
+        <Text style={styles.buttonText}>Next</Text>
+      </TouchableOpacity>
     </View>
   );
 };
@@ -228,6 +242,18 @@ const styles = StyleSheet.create({
     fontWeight: '500',
     color: 'rgba(147, 193, 69, 1)',
     borderRadius: 5,
+  },
+  nextButton: {
+    position: 'absolute',
+    bottom: 20,
+    right: 20,
+    padding: 10,
+    backgroundColor: '#007BFF',
+    borderRadius: 5,
+  },
+  buttonText: {
+    color: '#FFF',
+    fontSize: 16,
   },
 });
 

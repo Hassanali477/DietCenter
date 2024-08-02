@@ -31,7 +31,7 @@ const ClinicFlatlist = ({navigation}) => {
       url: 'https://api.ndcsystem.online/v1/options/clinics_data',
       headers: {
         Authorization:
-          'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIzIiwianRpIjoiZjliYzg3MGE5YWIyMGY1ODI2Y2Q3MTJhZDE4ODEzYTRhMzU5ZjYyYjFjZmQ2NGMyNGJlMGMzZmFjZGI3ZGFiOWY2MjVmMDA4N2Q2YzI1ODciLCJpYXQiOjE3MjIyMzE3MDkuODUzNjA2LCJuYmYiOjE3MjIyMzE3MDkuODUzNjA4LCJleHAiOjE3MjIzMTgxMDkuODQ2NTI2LCJzdWIiOiIyOCIsInNjb3BlcyI6W119.GCYXxmJY_7G_FyfNvIR4gRKMY-FYKDsGp5E7T3n8485c6UD-2ppNZEBsOKRkbk2V_u8fZtO73StibA_BtMYX67UTl0TT9REXnM3AURtxSqyyFvFsmlzm5_bKcrB-KpgCpI_B7fWcEXLwQeGYW6E_HiGYD3QDM0fNdwEpDGMzmMNVJ54qQxe6vHl2e3KKwVthz5v5mPUzNnXziCpdz0tlmpN6jTFSaH0jI7ORAjFLICoi0P5TB5vkr_eCMOBJNbQlBo01wFo9lIV3hbbfldy_jH3BZMx1-XqPCtBSRI0NX16WtbMjLFf-pM3QKOfJl7R9gToDvv8uZP2n1GiDyaw0CLk1QhiUqfg2IFrDX4pGLA9Rm-WD8rmY8MwqqWpeU43Jec7RMlhEedmDmgxX_2OUqDjxMQQj7hp_7BGhT-hOyQZ23gziM0H2C9QNLVQ4SLXF_0_7XD65o6DBjTkGAW9RoS7fqEF3PtjOoODLwFR_XKPYG6TZitgrXZAwGUlqu5qWumgMcrDZAYLFeQ8SYYTc_BPBlhYb0-D9OrKgj5Cwv1sQsigdi2I9mOj3wMhLZ4LoKmv3EXPsT64VE9PljnXVG9AfoNpRWMalbCzWqWvMYoanl7TIZtVqD-Xk4K4sIf65Z5ZqqMh_oAe67aR_w2IvSpn04eajXyfmwgAt1vIYLwI',
+          'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIzIiwianRpIjoiYzBkY2QwYmVjYzZhYjNiOGUxZTRjOThkZDRmMzIwZDU3M2RkNThmNDdmYTkxNTkwYjU3ZmY1MzgyYTEyY2FiNzYzNzZmZTg3ZDQ1ODQ3MTMiLCJpYXQiOjE3MjI1ODMzNjAuNTY5NzEyLCJuYmYiOjE3MjI1ODMzNjAuNTY5NzE0LCJleHAiOjE3MjI2Njk3NjAuNTYzMjc0LCJzdWIiOiIyOCIsInNjb3BlcyI6W119.MSoV5f4I_3xxsHME-74vM65peZC3pIg8XryB3c0vWX7pxtScTjXOg2RtmfCIOBMzcFQS5c_5gWis7OaFFgfEm-bJWodzqMAEiE_l2F6jgvthxD5vdAu8AWvr3qus_Xy4BpSTUQcrwMzjS0c9bimBMhrDydOifwy3d5H3BmUhl9L59uHH9pz2GxNF-B-0LBK6CORFiWTVgua3dCKqotHBhULR1E07aulqwNYd2IfspgItk9ZNbe41oxfgVNgbtwMvhHdy5iu7HPfd5Y-h3nwHDjuQXK_laPli0313FWiqHaFTrzTMW-w-QqvOWP1s_nA-h-f_wtEd1Vj8_PSy_GxxOQx1x0p8zktZB1S1NSx_7e6E_Tj4RjrXxUuMyFhJF-hDiue_2xdpN68eYvJArXpj3aTWS6Ru0WqnfU7_EDB4TzA936RbffbhixjliCgtsBTSUc4mFKvw8VKhRZIxXjecA5dsQwxDboVqaWWcvSHszBDgHrl32_JmlwJI5WGVIShxPeGrZoMovjqlzwXNpSRoD_KWmfaJAwYzGFYk8MT9ZX7QH-S-7fzUBJUmHF9gt-U6VUwjsF5oNrDeUFDFhS7gZ5Tov22eMV66eM2nheutuHTqCDZamF9UBBJhczvmDCIgNFnsN-QyczetVQcADi_Ox_DPlkgyHU7a4Nnr4f4eH0M',
       },
     };
 
@@ -194,6 +194,7 @@ const ClinicFlatlist = ({navigation}) => {
         keyExtractor={item => item.id.toString()}
         contentContainerStyle={styles.flatListContent}
       />
+     
     </ScrollView>
   );
 };
@@ -282,6 +283,18 @@ const styles = StyleSheet.create({
   },
   errorText: {
     color: 'red',
+    fontSize: 16,
+  },
+  nextButton: {
+    position: 'absolute',
+    bottom: 20,
+    right: 20,
+    padding: 10,
+    backgroundColor: '#007BFF',
+    borderRadius: 5,
+  },
+  buttonText: {
+    color: '#FFF',
     fontSize: 16,
   },
 });

@@ -8,10 +8,12 @@ import {
   Image,
   Button,
 } from 'react-native';
+import {useNavigation} from '@react-navigation/native';
 
 const {width, height} = Dimensions.get('screen');
 
 const CustomTextInput = () => {
+  const navigation = useNavigation();
   const [selectedGender, setSelectedGender] = useState(null);
   const [language, setLanguage] = useState('english');
 
@@ -101,6 +103,11 @@ const CustomTextInput = () => {
           </TouchableOpacity>
         ))}
       </View>
+      <TouchableOpacity
+        style={styles.nextButton}
+        onPress={() => navigation.navigate('HomeScreenCard')}>
+        <Text style={styles.buttonText}>Next</Text>
+      </TouchableOpacity>
     </View>
   );
 };
@@ -192,6 +199,18 @@ const styles = StyleSheet.create({
   checkIcon: {
     width: 18,
     height: 18,
+  },
+  nextButton: {
+    position: 'absolute',
+    bottom: 20,
+    right: 20,
+    padding: 10,
+    backgroundColor: '#007BFF',
+    borderRadius: 5,
+  },
+  buttonText: {
+    color: '#FFF',
+    fontSize: 16,
   },
 });
 
